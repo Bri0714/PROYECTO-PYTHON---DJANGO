@@ -1,0 +1,18 @@
+<form action="" metod="get">
+
+    <input type="text" name = "apellido" id = "apellido">
+
+    <button type="submit" value="buscar"> buscar </button>
+
+
+</form>
+
+{% if conductores %}
+        <ul>     
+            {% for conductor1 in conductores %}
+                <li> conductor {{conductor1.nombre}}{{conductor1.apellido}} con numero  de celular {{conductor1.celular}} y mi edad es {{conductor1.edad}} años </li>
+            {% endfor %}
+        </ul>
+{% else %}
+        <p> No hay datos del conductor, vuelve a intentarlo.</p>
+{% endif %}
