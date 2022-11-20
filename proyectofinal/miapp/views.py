@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import conductor,empresa,ruta
-from .forms import crearempresaform, crearrutaform
+from miapp.models import conductor,empresa,ruta
+from miapp.forms import crearempresaform, crearrutaform
 
 
 
@@ -83,8 +83,8 @@ def crear_ruta(request):
 
 def buscar_conductor(request):
         
-        if request.GET.get("conductor" , False):
-                apellido = request.GET("apellido")
+        if request.GET.get("apellido" , False):
+                apellido = request.GET["apellido"]
                 conductores = conductor.objects.filter(apellido__icontains=apellido)
                 
                 return render(request, "buscar_conductor.html", {"conductores" : conductores})
