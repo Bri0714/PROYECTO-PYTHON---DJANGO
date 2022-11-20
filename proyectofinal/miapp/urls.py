@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from miapp.views import mostrar_conductor_html,mostrar_index,crear_conductor,crear_empresa,crear_ruta,buscar_conductor
+from miapp.views import mostrar_conductor_html,mostrar_index,crear_conductor,crear_empresa,crear_ruta,buscar_conductor,buscar_ruta
 
 
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path("crear_conductor/", crear_conductor, name="conductor"),
     path("crear_empresa/", crear_empresa, name = "empresa"),
     path("crear_ruta/", crear_ruta, name = "ruta"),
-    path("buscar_conductor/", buscar_conductor, name = "buscar")
+    path("buscar_conductor/", buscar_conductor, name = "buscar_conductor"),
+    path("buscar_ruta/", buscar_ruta, name = "buscar_ruta")
     
 ]

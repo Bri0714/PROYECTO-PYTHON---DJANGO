@@ -1,0 +1,18 @@
+<form action="" metod="get">
+
+    <input type="text" name = "placa" id = "placa">
+
+    <button type="submit" value="buscar"> buscar </button>
+
+
+</form>
+
+{% if rutas %}
+        <ul>     
+            {% for ruta in rutas %}
+                <li> la ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.(pronto se le dara una empresa y conductor)</li>
+            {% endfor %}
+        </ul>
+{% else %}
+        <p> No hay datos de esta ruta, vuelve a intentarlo.</p>
+{% endif %}

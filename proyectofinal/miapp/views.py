@@ -92,3 +92,15 @@ def buscar_conductor(request):
                 respuesta = "no hay datos"
         
         return render(request, "buscar_conductor.html", {"respuesta" : respuesta} )
+
+def buscar_ruta(request):
+        
+        if request.GET.get("placa" , False):
+                apellido = request.GET["placa"]
+                rutas = ruta.objects.filter(placa__icontains=apellido)
+                
+                return render(request, "buscar_ruta.html", {"rutas" : rutas})
+        else:
+                respuesta = "no hay datos"
+        
+        return render(request, "buscar_ruta.html", {"respuesta" : respuesta} )
