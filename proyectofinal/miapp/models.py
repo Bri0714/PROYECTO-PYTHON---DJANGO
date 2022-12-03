@@ -13,6 +13,9 @@ class conductor(models.Model):
     celular = models.IntegerField()
     edad = models.IntegerField()
     empresa =  models.ForeignKey(empresa, on_delete=models.CASCADE, default=1)
+
+    def __str__(self) :
+        return f"Nombre: { self.nombre}, Apellido: {self.apellido}, Celular: {self.celular},Edad: {self.edad},Empresa: {self.empresa}"
     
 
 class ruta(models.Model):

@@ -8,18 +8,20 @@ from miapp.forms import crearempresaform, crearrutaform,crearconductorform
 def mostrar_conductor_html(request):
 
 
-        conductor1 = conductor(nombre = "ricardo", apellido = "fernandez", celular = "3124715263", edad = 39)
-        conductor2 = conductor(nombre = "andrea", apellido = "amezquita", celular = "312789456", edad = 31)
+        conductores = conductor.objects.all()
+        context = {"conductores": conductores}
+        #conductor2 = conductor(nombre = "andrea", apellido = "amezquita", celular = "312789456", edad = 31)
         #return render(request, "mostrar_conductor.html", {"nombre" : conductor1.nombre, "apellido" :conductor1.apellido, "celular" : conductor1.celular, "edad" : conductor1.edad})
         
-        return render(request, "mostrar_conductor.html", {"conductores": [conductor1, conductor2]})
+        return render(request, "mostrar_conductor.html", context=context)
+
 
 
 def mostrar_index(request):
 
         return render(request, "index.html")
 
-#para crear formulario sin form.
+
 
 def crear_conductor(request):
 
@@ -31,9 +33,9 @@ def crear_conductor(request):
                         
                         formulario_limpio = formulario.cleaned_data
                         
-                        conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
+                        conductores = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
                         
-                        conductor1.save()
+                        conductores.save()
                 
                 return render(request, "index.html")
 
@@ -41,7 +43,7 @@ def crear_conductor(request):
                 
                 formulario = crearconductorform()
 
-        return render(request, "crear_conductor.html", {"formulario" : formulario } )
+        return render(request, "crear_conductor.html", {"formulario" : crearconductorform } )
 
 
 
