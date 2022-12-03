@@ -130,3 +130,15 @@ def buscar_empresa(request):
                 respuesta = "no hay datos"
         
         return render(request, "buscar_empresa.html", {"respuesta" : respuesta} )
+
+
+def eliminar_conductor(request, conductor_id):
+
+        conductores = conductor.objects.get( id = conductor_id)
+
+        conductores.delete()
+
+        conductores = conductor.objects.all()
+        context = {"conductores": conductores}
+        
+        return render(request, "mostrar_conductor.html", context=context)
