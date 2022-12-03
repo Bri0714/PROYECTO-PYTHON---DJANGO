@@ -33,27 +33,36 @@
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
-    
-        <form action="" metod="get">
 
-            <h3>Buscar Ruta</h3>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5">
+                    <div class="text-center text-black">
 
-            <input type="text" name = "placa" id = "placa">
-        
-            <button type="submit" value="buscar"> buscar </button>
-        
-        
-        </form>
-        
-        {% if rutas %}
-                <ul>     
-                    {% for ruta in rutas %}
-                        <li> la ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.(pronto se le dara una empresa y conductor)</li>
-                    {% endfor %}
-                </ul>
-        {% else %}
-                <p> No hay datos de esta ruta, vuelve a intentarlo.</p>
-        {% endif %}
+                        <form action="" metod="get">
+
+                            <h3>Buscar Ruta</h3>
+                
+                            <input type="text" name = "placa" id = "placa">
+                        
+                            <button type="submit" value="buscar"> buscar </button>
+                        
+                        
+                        </form>
+                        
+                        {% if rutas %}
+                                <ul>     
+                                    {% for ruta in rutas %}
+                                        <li> la ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.(pronto se le dara una empresa y conductor)</li>
+                                    {% endfor %}
+                                </ul>
+                        {% else %}
+                                <p> No hay datos de esta ruta, vuelve a intentarlo.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div> 
         
     <!-- Footer-->
     <footer class="footer bg-light">

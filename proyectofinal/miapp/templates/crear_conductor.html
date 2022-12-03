@@ -34,20 +34,26 @@
             </div>
         </nav>
         
-        <form action ="" method="post">{% csrf_token %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5">
+                    <div class="text-center text-black">
 
-            <h3>Crear conductor</h3>
-            
-        
-            <table>
-                {{formulario.as_table}}
-            </table>
-        
-        
-            <button type="submit" value="enviar"> enviar </button>
-        
-        
-        </form> 
+                        <form action ="" method="post">{% csrf_token %}
+
+                            <h3>Crear conductor</h3>
+                            
+                            
+                                <table class = "table table-bordered mx-auto d-block">
+                                    {{formulario.as_table}}
+                                </table>
+                            <button type="submit" value="enviar"> enviar </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
         
     <!-- Footer-->
     <footer class="footer bg-light">

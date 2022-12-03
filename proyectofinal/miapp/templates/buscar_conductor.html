@@ -33,27 +33,38 @@
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5">
+                    <div class="text-center text-black">
+
+                        <form action="" metod="get">
+
+                            <h3>Buscar Conductor.</h3>
+                
+                            <input type="text" name = "apellido" id = "apellido">
+                        
+                            <button type="submit" value="buscar"> buscar </button>
+                        
+                        
+                        </form>
+                        
+                        {% if conductores %}
+                                <ul>     
+                                    {% for conductor in conductores %}
+                                        <li> conductor {{conductor.nombre}}{{conductor.apellido}} con numero  de celular {{conductor.celular}} y mi edad es {{conductor.edad}} años , de la empresa:{{consuctor.empresa}}</li>
+                                    {% endfor %}
+                                </ul>
+                        {% else %}
+                                <p> No hay datos del conductor, vuelve a intentarlo.</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div> 
     
-        <form action="" metod="get">
-
-            <h3>Buscar Conductor.</h3>
-
-            <input type="text" name = "apellido" id = "apellido">
-        
-            <button type="submit" value="buscar"> buscar </button>
-        
-        
-        </form>
-        
-        {% if conductores %}
-                <ul>     
-                    {% for conductor in conductores %}
-                        <li> conductor {{conductor.nombre}}{{conductor.apellido}} con numero  de celular {{conductor.celular}} y mi edad es {{conductor.edad}} años , de la empresa:{{consuctor.empresa}}</li>
-                    {% endfor %}
-                </ul>
-        {% else %}
-                <p> No hay datos del conductor, vuelve a intentarlo.</p>
-        {% endif %}
         
     <!-- Footer-->
     <footer class="footer bg-light">

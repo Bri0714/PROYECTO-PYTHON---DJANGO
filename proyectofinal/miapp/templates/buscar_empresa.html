@@ -33,31 +33,41 @@
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
-    
-        <form action="" metod="get">
 
-            <h3>Buscar Empresa</h3>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5">
+                    <div class="text-center text-black">
 
-            <input type="text" name = "nombre" id = "nombre">
-        
-            <button type="submit" value="buscar"> buscar </button>
-        
-        
-        </form>
-        
-        {% if empresas %}    
-                    {% for empresa in empresas %}
+                        <form action="" metod="get">
+
+                            <h3>Buscar Empresa</h3>
+                
+                            <input type="text" name = "nombre" id = "nombre">
                         
-                        <h2>la empresa {{empresa.nombre}} tiene a su cargo a los conductores:</h2>
-                            <ul>
-                                {% for conductor in conductores %}
-                                    <li>  {{conductor.nombre}} de la empresa {{conductor.empresa}}</li> 
-                                {% endfor %}
-                            </ul>
-                    {% endfor %}
-        {% else %}
-                <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
-        {% endif %}
+                            <button type="submit" value="buscar"> buscar </button>
+                        
+                        
+                        </form>
+                        
+                        {% if empresas %}    
+                                    {% for empresa in empresas %}
+                                        
+                                        <h2>la empresa {{empresa.nombre}} tiene a su cargo a los conductores:</h2>
+                                            <ul>
+                                                {% for conductor in conductores %}
+                                                    <li>  {{conductor.nombre}} de la empresa {{conductor.empresa}}</li> 
+                                                {% endfor %}
+                                            </ul>
+                                    {% endfor %}
+                        {% else %}
+                                <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div> 
         
     <!-- Footer-->
     <footer class="footer bg-light">
