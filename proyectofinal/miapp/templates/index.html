@@ -22,12 +22,14 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                <a class="btn btn-primary" href="{% url "inicio" %}"> inicio </a>
                 <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
-                <a class="btn btn-primary" href="{% url "ruta" %}"> Crear Ruta </a>
+                <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
                 <a class="btn btn-primary" href="{% url "buscar_conductor" %}"> Buscar Conductor </a>
                 <a class="btn btn-primary" href="{% url "buscar_ruta" %}"> Buscar Ruta </a>
+                <a class="btn btn-primary" href="{% url "buscar_empresa" %}"> Buscar Empresa </a>
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
@@ -38,7 +40,12 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Generate more leads with a professional landing page!</h1>
+                            <h1 class="mb-5">BIENVENIDOS A BLOG-TRANSPORTES ESCOLARES ENCUENTRA:</h1>
+                                <ul>
+                                    <li> Mejores conductores de la ciudad.</li>
+                                    <li> Mejores empresas de la ciudad.</li>
+                                    <li> Mejores rutas para la comodidad de sus hijos. </li>
+                                </ul>
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->
@@ -49,14 +56,6 @@
                             <!-- to get an API token!-->
                             <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
                                 <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                                    </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                                </div>
                                 <!-- Submit success message-->
                                 <!---->
                                 <!-- This is what your users will see when the form-->
@@ -86,7 +85,7 @@
 
         
         {% endblock %}-->
-       
+
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">

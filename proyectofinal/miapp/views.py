@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from miapp.models import conductor,empresa,ruta
-from miapp.forms import crearempresaform, crearrutaform
+from miapp.forms import crearempresaform, crearrutaform,crearconductorform
 
 
 
@@ -16,68 +16,80 @@ def mostrar_conductor_html(request):
 
 
 def mostrar_index(request):
-    
+
         return render(request, "index.html")
 
+#para crear formulario sin form.
 
 def crear_conductor(request):
-    
+
         if request.method == "POST":
-            
-            conductor1 = conductor(nombre=request.POST["nombre"], apellido=request.POST["apellido"], celular=request.POST["celular"], edad=request.POST["edad"])
-            
-            conductor1.save()
-            
-            return render(request, "index.html")
-    
-        return render(request, "crear_conductor.html")
-    
+
+                formulario = crearconductorform(request.POST)
+                
+                if formulario.is_valid():
+                        
+                        formulario_limpio = formulario.cleaned_data
+                        
+                        conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
+                        
+                        conductor1.save()
+                
+                return render(request, "index.html")
+
+        else:
+                
+                formulario = crearconductorform()
+
+        return render(request, "crear_conductor.html", {"formulario" : formulario } )
+
+
 
 def crear_empresa(request):
-    
-       
+
+
         if request.method == "POST":
-    
+
                 formulario = crearempresaform(request.POST)
                 
                 if formulario.is_valid():
-                    
-                    formulario_limpio = formulario.cleaned_data
                         
-                    empresa1 = empresa(nombre=formulario_limpio["nombre"])
-                    
-                    empresa1.save()
-            
+                        formulario_limpio = formulario.cleaned_data
+                        
+                        empresa1 = empresa(nombre=formulario_limpio["nombre"])
+                        
+                        empresa1.save()
+                
                 return render(request, "index.html")
-        
+
         else:
-            
-            formulario = crearempresaform()
-    
+                
+                formulario = crearempresaform()
+
         return render(request, "crear_empresa.html", {"formulario" : formulario } )
 
 
 def crear_ruta(request):
-    
-       
+
+
         if request.method == "POST":
-    
+
                 formulario = crearrutaform(request.POST)
                 
                 if formulario.is_valid():
-                    
-                    formulario_limpio = formulario.cleaned_data
                         
-                    ruta1 = ruta( number=formulario_limpio["number"], placa=formulario_limpio["placa"])
-                    
-                    ruta1.save()
-            
+                        formulario_limpio = formulario.cleaned_data
+                        
+                        ruta1 = ruta( number=formulario_limpio["number"], placa=formulario_limpio["placa"])
+                        
+                        ruta1.save()
+                
                 return render(request, "index.html")
-        
+
         else:
-            
-            formulario = crearrutaform()
-    
+                
+                formulario = crearrutaform()
+
         return render(request, "crear_ruta.html", {"formulario" : crearrutaform } )
 
 
@@ -104,3 +116,15 @@ def buscar_ruta(request):
                 respuesta = "no hay datos"
         
         return render(request, "buscar_ruta.html", {"respuesta" : respuesta} )
+
+def buscar_empresa(request):
+        
+        if request.GET.get("nombre" , False):
+                apellido = request.GET["nombre"]
+                empresas = ruta.objects.filter(nombre__icontains=apellido)
+                
+                return render(request, "buscar_empresa.html", {"empresas" : empresas})
+        else:
+                respuesta = "no hay datos"
+        
+        return render(request, "buscar_empresa.html", {"respuesta" : respuesta} )
