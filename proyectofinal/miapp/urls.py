@@ -29,6 +29,8 @@ urlpatterns = [
     path("buscar_conductor/", views.buscar_conductor, name = "buscar_conductor"),
     path("buscar_ruta/", views.buscar_ruta, name = "buscar_ruta"),
     path("buscar_empresa/", views.buscar_empresa, name = "buscar_empresa"),
-    path("eliminar_conductor/<conductor_id>", views.eliminar_conductor, name = "eliminar_conductor")
+    path("eliminar_conductor/<conductor_id>", views.eliminar_conductor, name = "eliminar_conductor"),
+    path("actualizar_conductor/<conductor_id>", views.actualizar_conductor, name = "actualizar_conductor"),
+    path("empresa_list", views.empresalist.as_view(), name = "list")
     
 ]

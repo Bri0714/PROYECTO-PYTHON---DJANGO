@@ -10,7 +10,7 @@ class crearconductorform(forms.Form):
     apellido = forms.CharField(max_length=40)
     celular = forms.IntegerField()
     edad = forms.IntegerField()
-    empresa =  forms.CharField(max_length=40)
+
 
 class crearrutaform(forms.Form):
     

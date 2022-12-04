@@ -33,36 +33,26 @@
             </div>
         </nav>
         
-        <div class="container position-relative">
+        <div class="container">
             <div class="row justify-content-center">
+                <div class="col-auto mt-5">
                     <div class="text-center text-black">
-                        <h1 class"">
-                            CONDUCTORES CON TODOS SUS DATOS:
-                        </h1>
-                        
-                    
-                        {% for conductor in conductores %}
-                    
-                                <p> 
-                                    {{conductor.id}}
-                                    {{conductor}} 
 
-                                </p>
-                                
-                                <button>
-                                    
-                                    <a class="text-black" href="{% url "eliminar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Eliminar</a>
-                                </button>
-                                <button>
-                                    
-                                    <a class="text-black" href="{% url "actualizar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Actualizar</a>
-                                </button>
-                    
-                        {% endfor %}
+                        <form action ="" method="post">{% csrf_token %}
+
+                                <h3>Actualizar conductor</h3>
+                            
+                            
+                                <table class = "table table-bordered mx-auto d-block">
+                                    {{formulario.as_table}}
+                                </table>
+                            <button type="submit" value="enviar"> enviar </button>
+
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
     <!-- Footer-->
     <footer class="footer bg-light">
         <div class="container">
@@ -106,6 +96,3 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
-
-
-

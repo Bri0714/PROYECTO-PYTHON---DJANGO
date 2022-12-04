@@ -36,29 +36,16 @@
         <div class="container position-relative">
             <div class="row justify-content-center">
                     <div class="text-center text-black">
-                        <h1 class"">
-                            CONDUCTORES CON TODOS SUS DATOS:
-                        </h1>
-                        
-                    
-                        {% for conductor in conductores %}
-                    
-                                <p> 
-                                    {{conductor.id}}
-                                    {{conductor}} 
 
-                                </p>
-                                
-                                <button>
-                                    
-                                    <a class="text-black" href="{% url "eliminar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Eliminar</a>
-                                </button>
-                                <button>
-                                    
-                                    <a class="text-black" href="{% url "actualizar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Actualizar</a>
-                                </button>
+                            <h1>Empresas Asociadas:</h1>
                     
-                        {% endfor %}
+                            {% for empresa in object_list %}
+                        
+                            <ul>
+                                <li>{{empresa}}</li>}
+                            </ul>
+                        
+                            {% endfor%}
                     </div>
                 </div>
             </div>
@@ -106,6 +93,4 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
-
-
 

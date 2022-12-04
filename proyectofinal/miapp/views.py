@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView
 from miapp.models import conductor,empresa,ruta
 from miapp.forms import crearempresaform, crearrutaform,crearconductorform
 
@@ -33,9 +34,9 @@ def crear_conductor(request):
                         
                         formulario_limpio = formulario.cleaned_data
                         
-                        conductores = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
+                        conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"])
                         
-                        conductores.save()
+                        conductor1.save()
                 
                 return render(request, "index.html")
 
@@ -142,3 +143,36 @@ def eliminar_conductor(request, conductor_id):
         context = {"conductores": conductores}
         
         return render(request, "mostrar_conductor.html", context=context)
+
+
+def actualizar_conductor(request,conductor_id):
+
+        conductor1 = conductor.objects.get( id = conductor_id)
+
+        if request.method == "POST":
+
+                formulario = crearconductorform(request.POST)
+                
+                if formulario.is_valid():
+                        
+                        formulario_limpio = formulario.cleaned_data
+                        
+                        conductor1.nombre = formulario_limpio["nombre"]
+                        conductor1.apellido = formulario_limpio["apellido"]
+                        conductor1.celular = formulario_limpio["celular"]
+                        conductor1.edad= formulario_limpio["edad"]
+
+                        conductor1.save()
+                
+                return render(request, "index.html")
+
+        else:
+                
+                formulario = crearconductorform(initial={"nombre":conductor.nombre,"apellido":conductor.apellido,"celular":conductor.celular,"edad":conductor.edad,})
+
+        return render(request, "actualizar_conductor.html", {"formulario" : crearconductorform } )
+
+class empresalist(ListView):
+        
+        model: empresa
+        template_name = "./miapp/empresa_list.html"
