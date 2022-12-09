@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from miapp.models import conductor,empresa,ruta
 from miapp.forms import crearempresaform, crearrutaform,crearconductorform
 
@@ -34,7 +36,7 @@ def crear_conductor(request):
                         
                         formulario_limpio = formulario.cleaned_data
                         
-                        conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"])
+                        conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
                         
                         conductor1.save()
                 
@@ -120,17 +122,22 @@ def buscar_ruta(request):
         
         return render(request, "buscar_ruta.html", {"respuesta" : respuesta} )
 
+
 def buscar_empresa(request):
         
-        if request.GET.get("nombre" , False):
-                apellido = request.GET["nombre"]
-                empresas = ruta.objects.filter(nombre__icontains=apellido)
+        if request.GET.get("empresa_id", False):
                 
-                return render(request, "buscar_empresa.html", {"empresas" : empresas})
+                empresa_id = request.GET["empresa_id"]
+                empresas = empresa.objects.filter(id = empresa_id)
+                #conductores = conductor.objects.filter(empresa_id=1)
+                #conductores = conductor.objects.all
+                return render(request, "buscar_empresa.html", {"empresas" : empresas})#,{"conductores" : conductores})
         else:
                 respuesta = "no hay datos"
         
         return render(request, "buscar_empresa.html", {"respuesta" : respuesta} )
+
+
 
 
 def eliminar_conductor(request, conductor_id):
@@ -172,7 +179,31 @@ def actualizar_conductor(request,conductor_id):
 
         return render(request, "actualizar_conductor.html", {"formulario" : crearconductorform } )
 
-class empresalist(ListView):
+
+class EmpresaList(ListView):
         
+        template_name = "MiApp/empresas_list.html"
         model: empresa
-        template_name = "./miapp/empresa_list.html"
+
+        def get_queryset(self):
+                return empresa.objects.all()
+
+class EmpresaDetail(DetailView):
+        
+        template_name = "MiApp/empresas_detalle.html"
+        model: empresa
+
+        def get_queryset(self):
+                return empresa.objects.all()
+
+class EmpresaDeleteView(DeleteView):
+
+        model: empresa
+        success_url = "/empresa_list"
+
+        def get_queryset(self):
+                return empresa.objects.all()
+
+
+
+

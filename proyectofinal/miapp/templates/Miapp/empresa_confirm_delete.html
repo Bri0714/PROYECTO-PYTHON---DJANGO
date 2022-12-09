@@ -15,7 +15,7 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static "miapp/css/styles.css" %}" rel="stylesheet" />
+        <link href="{% static "/miapp/css/styles.css" %}" rel="stylesheet" />
 
     </head>
     <body>
@@ -33,41 +33,22 @@
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
-
-        <div class="container">
+        
+        <div class="container position-relative">
             <div class="row justify-content-center">
-                <div class="col-auto mt-5">
-                    <div class="text-center text-black">
-
-                        <form action="" metod="get">
-
-                            <h3>Buscar Empresa</h3>
-                
-                            <input type="text" name = "empresa_id" id = "empresa_id">
+                    <div class="text-center text-white ">
                         
-                            <button type="submit" value="buscar"> buscar </button>
-                        
-                        
+                        <form method="post">{% csrf_token %}
+                            
+                            <p class="bg-danger">Estas seguro si deseas eliminar esta empresa de la base de datos: {{object}}?</p>
+                            <input type="submit" value="Eliminar">
                         </form>
-                        
-                        {% if empresas %}
-                            {% for empresa in empresas %}
-                                <h1> La Empresa {{empresa.nombre}} , Tiene a su cargo los siguientes conductores:</h1> 
-                            {% endfor %}   
-                            <ul>     
-                                {% for conductor in empresas %}
-                                    <li>{{conductor}}</li>
-                                {% endfor %}
-                            </ul>        
-                        {% else %}
-                                <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
-                        {% endif %}
 
+                            
                     </div>
                 </div>
             </div>
-        </div> 
-        
+        </div>
     <!-- Footer-->
     <footer class="footer bg-light">
         <div class="container">
@@ -111,3 +92,4 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
+

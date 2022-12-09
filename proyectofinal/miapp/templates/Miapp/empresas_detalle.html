@@ -15,7 +15,7 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static "miapp/css/styles.css" %}" rel="stylesheet" />
+        <link href="{% static "/miapp/css/styles.css" %}" rel="stylesheet" />
 
     </head>
     <body>
@@ -23,6 +23,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="btn btn-primary" href="{% url "inicio" %}"> inicio </a>
+                <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
                 <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
@@ -37,15 +38,23 @@
             <div class="row justify-content-center">
                     <div class="text-center text-black">
 
-                            <h1>Empresas Asociadas:</h1>
-                    
-                            {% for empresa in object_list %}
-                        
-                            <ul>
-                                <li>{{empresa}}</li>}
-                            </ul>
-                        
-                            {% endfor%}
+                            <h1>INFORMACION FUNCIONAMIENTO EMPRESAS ESCOLARES:</h1>
+                            
+                            <p>Con el objetivo de realizar el proceso de asignación de los beneficios del Programa de Movilidad Escolar, PME, para la vigencia 2022, en las modalidades de Rutas Escolares y Subsidios de Transporte Escolar, la Dirección de Bienestar Estudiantil de la Secretaría de Educación del Distrito unificó dicho proceso con el de la matrícula, a partir de la información registrada para la solicitud de cupo o continuidad en el sistema educativo.<br>
+                            <br>
+
+                                En este sentido, el PME realizará la verificación del cumplimiento de requisitos para la asignación de acuerdo a la población estudiantil que lo requiera, y conforme a su condición en el sistema educativo distrital, así:
+                                
+                                <ol>
+                                    <li> Realizan la solicitud de cupo o traslado o hacen parte de la continuidad educativa, para que registren debidamente la información, requerida en el formulario dispuesto por la SED, toda vez que, de esta dependerá la verificación de requisitos y entrega de información para la asignación.</li>
+
+                                </ol>
+
+                                <button  class="btn bg-dark text-white">
+                                    <a class="btn bg-dark text-white" href="{% url "List" %}"> Regresar </a>
+                                </button>
+                            </p>
+                            
                     </div>
                 </div>
             </div>

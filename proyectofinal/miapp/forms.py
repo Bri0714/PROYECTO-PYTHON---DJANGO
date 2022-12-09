@@ -1,16 +1,21 @@
 from django import forms
+from miapp import models
 
 class crearempresaform(forms.Form):
     
     nombre = forms.CharField(max_length=40)
 
-class crearconductorform(forms.Form):
+class crearconductorform(forms.ModelForm):
     
-    nombre = forms.CharField(max_length=40)
-    apellido = forms.CharField(max_length=40)
-    celular = forms.IntegerField()
-    edad = forms.IntegerField()
-
+    class Meta:
+        model = models.conductor
+        fields = [
+            'nombre',
+            'apellido',
+            'celular',
+            'edad',
+            'empresa'
+        ]
 
 class crearrutaform(forms.Form):
     

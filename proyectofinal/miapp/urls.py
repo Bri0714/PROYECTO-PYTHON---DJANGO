@@ -31,6 +31,8 @@ urlpatterns = [
     path("buscar_empresa/", views.buscar_empresa, name = "buscar_empresa"),
     path("eliminar_conductor/<conductor_id>", views.eliminar_conductor, name = "eliminar_conductor"),
     path("actualizar_conductor/<conductor_id>", views.actualizar_conductor, name = "actualizar_conductor"),
-    path("empresa_list", views.empresalist.as_view(), name = "list")
+    path("empresa_list/", views.EmpresaList.as_view(), name = "List"),
+    path("empresa_detail/<pk>", views.EmpresaDetail.as_view(), name = "Detail"),
+    path("eliminacion_confirmar/<pk>", views.EmpresaDeleteView.as_view(), name = "Delete")
     
 ]
