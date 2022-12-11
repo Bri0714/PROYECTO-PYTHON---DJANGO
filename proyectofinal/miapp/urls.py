@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
     
-    path("", views.mostrar_index,name="inicio"),
+    path("", views.mostrar_index,name="Home"),
     path("mostrar_conductor_html/", views.mostrar_conductor_html, name="Mostrar"),
     path("crear_conductor/", views.crear_conductor, name="conductor"),
     path("crear_empresa/", views.crear_empresa, name = "empresa"),
@@ -33,6 +33,8 @@ urlpatterns = [
     path("actualizar_conductor/<conductor_id>", views.actualizar_conductor, name = "actualizar_conductor"),
     path("empresa_list/", views.EmpresaList.as_view(), name = "List"),
     path("empresa_detail/<pk>", views.EmpresaDetail.as_view(), name = "Detail"),
-    path("eliminacion_confirmar/<pk>", views.EmpresaDeleteView.as_view(), name = "Delete")
-    
+    path("eliminacion_confirmar/<pk>", views.EmpresaDeleteView.as_view(), name = "Delete"),
+    path("signup/", views.SignUpView.as_view(), name = "Sign Up"),
+    path("login/", views.AdminLoginView.as_view(), name = "Login"),
+    path("logout/", views.AdminLogoutView.as_view(), name = "Logout")
 ]

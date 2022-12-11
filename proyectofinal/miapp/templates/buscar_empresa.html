@@ -22,7 +22,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="btn btn-primary" href="{% url "inicio" %}"> inicio </a>
+                <a class="btn btn-primary" href="{% url "Home" %}"> inicio </a>
                 <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
@@ -43,26 +43,27 @@
 
                             <h3>Buscar Empresa</h3>
                 
-                            <input type="text" name = "empresa_id" id = "empresa_id">
+                            <input type="text" name = "nombre_empresa" id = "nombre_empresa">
                         
                             <button type="submit" value="buscar"> buscar </button>
                         
                         
                         </form>
+                        <br>
+                        <br>
                         
-                        {% if empresas %}
-                            {% for empresa in empresas %}
-                                <h1> La Empresa {{empresa.nombre}} , Tiene a su cargo los siguientes conductores:</h1> 
-                            {% endfor %}   
-                            <ul>     
-                                {% for conductor in empresas %}
-                                    <li>{{conductor}}</li>
-                                {% endfor %}
-                            </ul>        
-                        {% else %}
-                                <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
-                        {% endif %}
-
+                            {% if empresas %}
+                                {% for empresa in empresas %}
+                                    <h1> La Empresa {{empresa.nombre}} , Tiene a su cargo los siguientes conductores:</h1> 
+                                {% endfor %}   
+                                <ul>     
+                                    {% for conductor in conductores %}
+                                        <li>{{conductor}}</li>
+                                    {% endfor %}
+                                </ul>        
+                            {% else %}
+                                    <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
+                            {% endif %}
                     </div>
                 </div>
             </div>

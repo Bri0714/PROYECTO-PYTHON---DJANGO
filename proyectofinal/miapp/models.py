@@ -7,7 +7,7 @@ class empresa(models.Model):
     nombre = models.CharField(max_length=40)
 
     def __str__(self) :
-        return f" { self.nombre}, Bogota DC."
+        return f" {self.nombre}, Bogota DC."
 
 class conductor(models.Model):
     

@@ -4,10 +4,14 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from miapp.models import conductor,empresa,ruta
-from miapp.forms import crearempresaform, crearrutaform,crearconductorform
+from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
+@login_required
 def mostrar_conductor_html(request):
 
 
@@ -19,13 +23,13 @@ def mostrar_conductor_html(request):
         return render(request, "mostrar_conductor.html", context=context)
 
 
-
+@login_required
 def mostrar_index(request):
 
         return render(request, "index.html")
 
 
-
+@login_required
 def crear_conductor(request):
 
         if request.method == "POST":
@@ -49,7 +53,7 @@ def crear_conductor(request):
         return render(request, "crear_conductor.html", {"formulario" : crearconductorform } )
 
 
-
+@login_required
 def crear_empresa(request):
 
 
@@ -73,7 +77,7 @@ def crear_empresa(request):
 
         return render(request, "crear_empresa.html", {"formulario" : formulario } )
 
-
+@login_required
 def crear_ruta(request):
 
 
@@ -97,7 +101,7 @@ def crear_ruta(request):
 
         return render(request, "crear_ruta.html", {"formulario" : crearrutaform } )
 
-
+@login_required
 def buscar_conductor(request):
         
         if request.GET.get("apellido" , False):
@@ -110,6 +114,7 @@ def buscar_conductor(request):
         
         return render(request, "buscar_conductor.html", {"respuesta" : respuesta} )
 
+@login_required
 def buscar_ruta(request):
         
         if request.GET.get("placa" , False):
@@ -122,16 +127,19 @@ def buscar_ruta(request):
         
         return render(request, "buscar_ruta.html", {"respuesta" : respuesta} )
 
-
+@login_required
 def buscar_empresa(request):
         
-        if request.GET.get("empresa_id", False):
+        if request.GET.get("nombre_empresa", False):
                 
-                empresa_id = request.GET["empresa_id"]
-                empresas = empresa.objects.filter(id = empresa_id)
-                #conductores = conductor.objects.filter(empresa_id=1)
-                #conductores = conductor.objects.all
-                return render(request, "buscar_empresa.html", {"empresas" : empresas})#,{"conductores" : conductores})
+                nombre_empresa = request.GET["nombre_empresa"]
+                empresas = empresa.objects.filter(nombre__icontains = nombre_empresa).values()
+
+                print(empresas[0]['id'])
+                conductores = conductor.objects.filter(empresa=empresas[0]['id'])
+                print(conductores)
+                
+                return render(request, "buscar_empresa.html", {"empresas" : empresas, "conductores" : conductores})
         else:
                 respuesta = "no hay datos"
         
@@ -139,7 +147,7 @@ def buscar_empresa(request):
 
 
 
-
+@login_required
 def eliminar_conductor(request, conductor_id):
 
         conductores = conductor.objects.get( id = conductor_id)
@@ -152,6 +160,7 @@ def eliminar_conductor(request, conductor_id):
         return render(request, "mostrar_conductor.html", context=context)
 
 
+@login_required
 def actualizar_conductor(request,conductor_id):
 
         conductor1 = conductor.objects.get( id = conductor_id)
@@ -180,7 +189,7 @@ def actualizar_conductor(request,conductor_id):
         return render(request, "actualizar_conductor.html", {"formulario" : crearconductorform } )
 
 
-class EmpresaList(ListView):
+class EmpresaList(LoginRequiredMixin,ListView):
         
         template_name = "MiApp/empresas_list.html"
         model: empresa
@@ -188,7 +197,7 @@ class EmpresaList(ListView):
         def get_queryset(self):
                 return empresa.objects.all()
 
-class EmpresaDetail(DetailView):
+class EmpresaDetail(LoginRequiredMixin,DetailView):
         
         template_name = "MiApp/empresas_detalle.html"
         model: empresa
@@ -196,7 +205,7 @@ class EmpresaDetail(DetailView):
         def get_queryset(self):
                 return empresa.objects.all()
 
-class EmpresaDeleteView(DeleteView):
+class EmpresaDeleteView(LoginRequiredMixin,DeleteView):
 
         model: empresa
         success_url = "/empresa_list"
@@ -205,5 +214,21 @@ class EmpresaDeleteView(DeleteView):
                 return empresa.objects.all()
 
 
+class SignUpView(CreateView):
 
+        form_class: SignUpForm
+        success_url = reverse_lazy("Login")
+        template_name = "registro.html"
 
+                
+        def get_form_class(self):
+                return SignUpForm
+        
+
+class AdminLoginView(LoginView):
+
+        template_name = "login.html"
+
+class AdminLogoutView(LogoutView):
+
+        template_name = "logout.html"

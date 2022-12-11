@@ -20,45 +20,23 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
+        <nav class="navbar navbar-light bg-light static-top ">
             <div class="container">
-                <a class="btn btn-primary" href="{% url "Home" %}"> inicio </a>
-                <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
-                <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
-                <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
-                <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
-                <a class="btn btn-primary" href="{% url "buscar_conductor" %}"> Buscar Conductor </a>
-                <a class="btn btn-primary" href="{% url "buscar_ruta" %}"> Buscar Ruta </a>
-                <a class="btn btn-primary" href="{% url "buscar_empresa" %}"> Buscar Empresa </a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+                <a class="btn btn-primary" href="{% url "Sign Up" %}"> Registrarse </a>
+                <a class="btn btn-primary" href="{% url "Login" %}">Iniciar Sesion</a>
             </div>
         </nav>
-
+        
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-auto mt-5">
-                    <div class="text-center text-black">
+                    <div class="text-justify text-black">
 
-                        <form action="" metod="get">
+                        <br>
+                        <br>
 
-                            <h3>Buscar Ruta</h3>
-                
-                            <input type="text" name = "placa" id = "placa">
-                        
-                            <button type="submit" value="buscar"> buscar </button>
-                        
-                        
-                        </form>
-                        
-                        {% if rutas %}
-                                <ul>     
-                                    {% for ruta in rutas %}
-                                        <li> la ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.(pronto se le dara una empresa y conductor)</li>
-                                    {% endfor %}
-                                </ul>
-                        {% else %}
-                                <p> No hay datos de esta ruta, vuelve a intentarlo.</p>
-                        {% endif %}
+                                    <h1> Has cerrado sesion sactisfactoriamente;Muchas gracias por visitarnos.</h1>
+
                     </div>
                 </div>
             </div>
@@ -107,3 +85,4 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
+
