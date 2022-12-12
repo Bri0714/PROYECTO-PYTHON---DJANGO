@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from miapp.models import conductor,empresa,ruta
-from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm
+from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm,UserEditForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.decorators import login_required
@@ -229,6 +229,41 @@ class AdminLoginView(LoginView):
 
         template_name = "login.html"
 
-class AdminLogoutView(LogoutView):
+class AdminLogoutView(LoginRequiredMixin,LogoutView):
 
         template_name = "logout.html"
+
+
+@login_required
+def editar_usuario(request):
+
+        usuario = request.user
+
+        if request.method == "POST":
+
+                usuario_form = UserEditForm(request.POST)
+
+                if usuario_form.is_valid():
+
+                        informacion = usuario_form.cleaned_data
+
+                        usuario.username = informacion["username"]
+                        usuario.email = informacion["email"]
+                        usuario.password1 = informacion["password1"]
+                        usuario.password2 = informacion["password2"]
+
+                        usuario.save()
+                
+                return render(request, "index.html" )
+
+        else:
+                usuario_form = UserEditForm(initial={
+                        "username": usuario.username,
+                        "email": usuario.email,
+
+                })
+        return render(request, "Miapp/admin_update.html", {
+                
+                "form" : usuario_form,
+                "usuario" : usuario
+        } )

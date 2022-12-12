@@ -36,5 +36,6 @@ urlpatterns = [
     path("eliminacion_confirmar/<pk>", views.EmpresaDeleteView.as_view(), name = "Delete"),
     path("signup/", views.SignUpView.as_view(), name = "Sign Up"),
     path("login/", views.AdminLoginView.as_view(), name = "Login"),
-    path("logout/", views.AdminLogoutView.as_view(), name = "Logout")
+    path("logout/", views.AdminLogoutView.as_view(), name = "Logout"),
+    path("editar_usuario/", views.editar_usuario, name = "Editar User"),
 ]
