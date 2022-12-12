@@ -6,4 +6,5 @@ from .models import *
 admin.site.register(conductor)
 admin.site.register(ruta)
 admin.site.register(empresa)
+admin.site.register(Avatar)
 

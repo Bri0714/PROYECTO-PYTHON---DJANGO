@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from miapp.models import conductor,empresa,ruta
+from miapp.models import conductor,empresa,ruta,Avatar
 from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm,UserEditForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
@@ -26,7 +26,9 @@ def mostrar_conductor_html(request):
 @login_required
 def mostrar_index(request):
 
-        return render(request, "index.html")
+        imagenes = Avatar.objects.filter(user = request.user.id)
+
+        return render(request, "index.html", {"url": imagenes[0].imagen.url})
 
 
 @login_required

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -28,3 +29,10 @@ class ruta(models.Model):
     
     def __str__(self) :
         return f"Ruta  de placa: { self.placa},con numero {self.number},de Bogota DC."
+
+
+class Avatar(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    imagen = models.ImageField(upload_to = "images/", null = True, blank=True)
