@@ -23,7 +23,6 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="btn btn-primary" href="{% url "Home" %}"> inicio </a>
-                <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
                 <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
@@ -33,33 +32,37 @@
                 <a class="btn btn-primary" href="{% url "Logout" %}">Logout</a>
             </div>
         </nav>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-auto mt-5">
-                    <div class="text-center text-black">
-
-                    {% if request.user.is_superuser %}  
-                        <form action ="" method="post">{% csrf_token %}
         
-                            <h3>Crear Ruta</h3>
-                    
-                            <table class = "table table-bordered mx-auto d-block">
-                                {{formulario.as_table}}
-                            </table>
-                    
-                            <button type="submit" value="enviar"> enviar </button>
-                    
-                        </form> 
-                    {%else%}
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                    <div class="text-center text-black">
+                        <br>
+                        <br>
+                        
+                        <h1 class"">
+                            Todos los comentarios quejas y Reclamos:
+                        </h1>
 
-                        <h2>Lo lamento no puedes crear ni modificar la ruta en la base de datos </h2>
+                        <br>
+                        <br>
+                        {% for comentario in comentarios %}
+                    
+                                    <h2> Author : {{comentario.author}}</h1>
+                                    <br>
 
-                    {% endif %}
+                                    <h5>{{comentario.conductor}}</h5>
+                                    
+                                    <br>
+                                        <p> -    {{comentario}}</p>
+
+                                    <br>
+                                            <p>{{comentario.created_date}}</p>
+                                        
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div> 
-
+        </div>
     <!-- Footer-->
     <footer class="footer bg-light">
         <div class="container">
@@ -103,3 +106,6 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
+
+
+

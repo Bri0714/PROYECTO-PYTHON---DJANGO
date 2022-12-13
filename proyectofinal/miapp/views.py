@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from miapp.models import conductor,empresa,ruta,Avatar
-from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm,UserEditForm
+from miapp.models import conductor,empresa,ruta,Avatar,Comment
+from .forms import crearempresaform, crearrutaform,crearconductorform,SignUpForm,UserEditForm,crearcomentarioform
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.decorators import login_required
@@ -91,7 +91,7 @@ def crear_ruta(request):
                         
                         formulario_limpio = formulario.cleaned_data
                         
-                        ruta1 = ruta( number=formulario_limpio["number"], placa=formulario_limpio["placa"])
+                        ruta1 = ruta( number=formulario_limpio["number"], placa=formulario_limpio["placa"], conductor =formulario_limpio["conductor"] )
                         
                         ruta1.save()
                 
@@ -119,11 +119,16 @@ def buscar_conductor(request):
 @login_required
 def buscar_ruta(request):
         
-        if request.GET.get("placa" , False):
-                apellido = request.GET["placa"]
-                rutas = ruta.objects.filter(placa__icontains=apellido)
+        if request.GET.get("placa", False):
                 
-                return render(request, "buscar_ruta.html", {"rutas" : rutas})
+                placa = request.GET["placa"]
+                rutas = ruta.objects.filter(placa__icontains = placa).values()
+
+                print(rutas[0]['id'])
+                conductores = conductor.objects.filter(ruta=rutas[0]['id'])
+                print(conductores)
+                
+                return render(request, "buscar_ruta.html", {"rutas" : rutas, "conductores" : conductores})
         else:
                 respuesta = "no hay datos"
         
@@ -269,3 +274,36 @@ def editar_usuario(request):
                 "form" : usuario_form,
                 "usuario" : usuario
         } )
+
+
+@login_required
+def post_details(request):
+
+        if request.method == "POST":
+
+                formulario = crearcomentarioform(request.POST)
+                
+                if formulario.is_valid():
+                        
+                        formulario_limpio = formulario.cleaned_data
+                        
+                        comentarios1 = Comment(conductor=formulario_limpio["conductor"], author=formulario_limpio["author"],text=formulario_limpio["text"],created_date=formulario_limpio["created_date"])
+                        
+                        comentarios1.save()
+                
+                return render(request, "index.html")
+
+        else:
+                
+                formulario = crearcomentarioform()
+
+        return render(request, "post_details.html", {"formulario" : crearcomentarioform } )
+
+@login_required
+def mostrar_comentarios(request):
+
+
+        comentarios = Comment.objects.all()
+        context = {"comentarios": comentarios }
+
+        return render(request, "mostrar_comentarios.html", context=context)

@@ -19,11 +19,15 @@ class crearconductorform(forms.ModelForm):
             'empresa'
         ]
 
-class crearrutaform(forms.Form):
+class crearrutaform(forms.ModelForm):
     
-    number = forms.IntegerField()
-    placa = forms.CharField(max_length=40)
-    
+    class Meta:
+        model = models.ruta
+        fields = [
+            'conductor',
+            'placa',
+            'number',
+        ]
 
 class SignUpForm(UserCreationForm):
 
@@ -53,4 +57,15 @@ class UserEditForm(UserCreationForm):
         ]
 
         help_texts = {k: "" for k in fields }
-        
+
+class crearcomentarioform(forms.ModelForm):
+    
+    class Meta:
+        model = models.Comment
+        fields = [
+            'conductor',
+            'author',
+            'text',
+            'created_date',
+        ]
+

@@ -54,15 +54,23 @@
                                     {{conductor}} 
 
                                 </p>
-                                
+                            
+                            {% if request.user.is_superuser  %}  
                                 <button>
                                     
                                     <a class="text-black" href="{% url "eliminar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Eliminar</a>
                                 </button>
+                            {%else%}
+
+                                <h6> - No Tienes Permisos para eliminiar datos de la BD.</h6>
+
+                            {% endif %}
+
                                 <button>
                                     
                                     <a class="text-black" href="{% url "actualizar_conductor" conductor_id=conductor.id %}"style="text-decoration:none">Actualizar</a>
                                 </button>
+                            
                     
                         {% endfor %}
                     </div>

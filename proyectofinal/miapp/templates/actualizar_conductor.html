@@ -39,6 +39,8 @@
                 <div class="col-auto mt-5">
                     <div class="text-center text-black">
 
+                    {% if request.user.is_superuser %}
+
                         <form action ="" method="post">{% csrf_token %}
 
                                 <h3>Actualizar conductor</h3>
@@ -50,6 +52,12 @@
                             <button type="submit" value="enviar"> enviar </button>
 
                         </form>
+                    
+                    {% else %}
+
+                        <h2> No Tienes permisos para actualizar los datos de la BD. </h2>
+
+                    {% endif %}
                     </div>
                 </div>
             </div>

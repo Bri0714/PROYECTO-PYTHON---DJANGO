@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta, timezone, tzinfo
 
 # Create your models here.
 
@@ -24,11 +25,13 @@ class conductor(models.Model):
 
 class ruta(models.Model):
     
-    number = models.IntegerField(null=True)
-    placa = models.CharField(max_length=40, null=True)
+    number = models.IntegerField()
+    placa = models.CharField(max_length=40)
+    conductor = models.ForeignKey(conductor, on_delete=models.CASCADE, default=1)
+
     
     def __str__(self) :
-        return f"Ruta  de placa: { self.placa},con numero {self.number},de Bogota DC."
+        return f"Ruta  de placa: { self.placa}, con numero {self.number}.   Conductor: {self.conductor}"
 
 
 class Avatar(models.Model):
@@ -36,3 +39,23 @@ class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     imagen = models.ImageField(upload_to = "images/", null = True, blank=True)
+
+    def __str__(self) :
+        return f"Avatar: { self.user} imagen : {self.imagen}, de Bogota DC."
+
+
+
+class Comment(models.Model):
+    
+    conductor = models.ForeignKey(conductor, on_delete=models.CASCADE, default=1)
+    author = models.CharField(max_length=40)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=datetime.now())
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text

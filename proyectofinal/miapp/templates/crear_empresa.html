@@ -38,6 +38,8 @@
                 <div class="col-auto mt-5">
                     <div class="text-center text-black">
                             
+                        {% if request.user.is_superuser %}                      
+         
                             <form action ="" method="post">{% csrf_token %}
         
                             <h3>Crear Empresa</h3>
@@ -45,11 +47,16 @@
                             <table  class = "table table-bordered mx-auto d-block">
                                 {{formulario.as_table}}
                             </table>
-                    
-                    
+    
                             <button type="submit" value="enviar"> enviar </button>
                     
                             </form> 
+
+                        {%else%}
+
+                            <h2> Lo lamento no puedes crear ni modificar la empresas en la base de datos </h2>
+
+                        {% endif %}    
                     </div>
                 </div>
             </div>

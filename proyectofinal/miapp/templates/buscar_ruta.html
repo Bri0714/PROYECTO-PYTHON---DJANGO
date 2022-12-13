@@ -39,6 +39,8 @@
                 <div class="col-auto mt-5">
                     <div class="text-center text-black">
 
+                        <p>PORFAVOR PARA BUSCAR LA RUTA COLOCA EL NUMERO DE PLACA CORRESPONDIENTE DE LO CONTRARIO COMUNICATE CON EL POSEEDOR DE LA BASE DE DATOS PARA OBTENER LA INFORMACION NECESARIA</P>
+
                         <form action="" metod="get">
 
                             <h3>Buscar Ruta</h3>
@@ -49,13 +51,22 @@
                         
                         
                         </form>
+
+                        <br>
+                        <br>
                         
-                        {% if rutas %}
-                                <ul>     
+                        {% if rutas %}    
+                                    
                                     {% for ruta in rutas %}
-                                        <li> la ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.(pronto se le dara una empresa y conductor)</li>
+                                        <h3> La ruta con placa {{ruta.placa}} y numero {{ruta.number}} esta activa.</h3>
+                                    
                                     {% endfor %}
-                                </ul>
+                                        
+                                    <ul>
+                                        {% for conductor in conductores %}
+                                        <li>CONDUCTOR:{{conductor}}</li>
+                                        {% endfor %}
+                                    </ul>   
                         {% else %}
                                 <p> No hay datos de esta ruta, vuelve a intentarlo.</p>
                         {% endif %}

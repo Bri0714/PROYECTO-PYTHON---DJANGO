@@ -38,4 +38,6 @@ urlpatterns = [
     path("login/", views.AdminLoginView.as_view(), name = "Login"),
     path("logout/", views.AdminLogoutView.as_view(), name = "Logout"),
     path("editar_usuario/", views.editar_usuario, name = "Editar User"),
+    path("post_details/", views.post_details, name = "comentario"),
+    path("mostrar_comentarios/", views.mostrar_comentarios, name="Mostrar Comentarios"),
 ]

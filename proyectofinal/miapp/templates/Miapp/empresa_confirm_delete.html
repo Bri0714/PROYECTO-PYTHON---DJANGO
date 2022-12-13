@@ -37,12 +37,20 @@
         <div class="container position-relative">
             <div class="row justify-content-center">
                     <div class="text-center text-white ">
-                        
-                        <form method="post">{% csrf_token %}
+
+                        {% if request.user.is_superuser %}
                             
-                            <p class="bg-danger">Estas seguro si deseas eliminar esta empresa de la base de datos: {{object}}?</p>
-                            <input type="submit" value="Eliminar">
-                        </form>
+                            <form method="post">{% csrf_token %}
+                                
+                                <p class="bg-danger">Estas seguro si deseas eliminar esta empresa de la base de datos: {{object}}?</p>
+                                <input type="submit" value="Eliminar">
+                            </form>
+
+                        {% else %}
+                            <div class="text-center text-black ">
+                                <h2> No tiene permisos este usuario para eliminar datos de la base de datos. </h2>
+                            </div>
+                        {% endif %}
 
                             
                     </div>

@@ -22,20 +22,14 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                <a class="btn btn-primary" href="{% url "Home" %}"> inicio </a>
+                <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
                 <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
                 <a class="btn btn-primary" href="{% url "buscar_conductor" %}"> Buscar Conductor </a>
                 <a class="btn btn-primary" href="{% url "buscar_ruta" %}"> Buscar Ruta </a>
                 <a class="btn btn-primary" href="{% url "buscar_empresa" %}"> Buscar Empresa </a>
-                
-                {% if request.user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url "Logout" %}">Logout</a>
-                {% else %}
-                    <a class="btn btn-primary" href="{% url "Login" %}">Iniciar Sesion</a>
-                {% endif %}
-
-                <a class="btn btn-primary" href="{% url "Editar User" %}">Editar usuario</a>
                 
             </div>
         </nav>
@@ -47,56 +41,27 @@
 
                             <!-- Page heading-->
 
-
-
-                            {% if request.user.is_authenticated %}
-                                <h1 class="mb-5"> Hola , {{user.username}} </h1>
-                                    <img src="{{url}}" width="200" height="200" alt="">
-                            {% else %}
-                                <h1 class="mb-5"> Hola , invitado </h1>
-                            {% endif %}
-
-                            <br>
-                            <br>
+                            <form action ="" method="post">{% csrf_token %}
                             
-                            <h1 class="mb-5">BIENVENIDO A BLOG-TRANSPORTES ESCOLARES ENCUENTRA:</h1>
-                                <ul>
-                                    <li> Mejores conductores de la ciudad.</li>
-                                    <li> Mejores empresas de la ciudad.</li>
-                                    <li> Mejores rutas para la comodidad de sus hijos. </li>
-                                </ul>
-                                <div class="container">
-                                    <a class="btn bg-dark text-white" href="{% url "Mostrar" %}"> Mostrar Conductores </a>
-                                    <a class="btn bg-dark text-white" href="{% url "List" %}"> Mostrar Empresas </a>
-                                    <a class="btn bg-dark text-white" href="{% url "comentario" %}"> Comentarios </a>
-                                    <a class="btn bg-dark text-white" href="{% url "Mostrar Comentarios" %}"> Mostrar Comentarios </a>
-                            <!-- Signup form-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
+                                <h2>Comentarios, Quejas y Reclamos de nuestros conductores y empresas:</h2>
+
+                                <p> Para nosotros es muy importatnte saber cuales son las dificultades que presenta nuestro cliente por eso dejamos este espacio para que exprese 
+                                    sus inconformidades o cosas para mejorar de nuestro servicio. Gracias</p>
+                                
+
+                                    <form action ="" method="post">{% csrf_token %}
+                                    
+                                    
+                                        <table class = "table text-white table-bordered mx-auto d-block">
+                                            {{formulario.as_table}}
+                                        </table>
+
+                                    <button type="submit" value="enviar"> enviar </button>
+        
+                                    </form>
+                            
+                            
+                            </form> 
                         </div>
                 </div>
             </div>
