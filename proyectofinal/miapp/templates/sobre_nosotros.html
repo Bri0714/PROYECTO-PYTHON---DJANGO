@@ -40,79 +40,62 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
-                        <div class="text-center text-white">
+                        <div class="text-justify text-black">
 
                             <!-- Page heading-->
-
-                            <div class="container">
-                                <a class="btn bg-dark text-white" href="{% url "Sobre Nosotros" %}"> ABOUT ME : </a>
+                            <div class="container position-relative">
+                                <div class="row justify-content-center">
+                                        <div class="text-center text-black">
+                                            <br>
+                                            <br>
+                                            {% if request.user.is_authenticated %}
+                                                <h1 class="mb-5"> Hola , {{user.username}} </h1>
+                                                    <img src="{{url}}" width="200" height="200" >
+                                            {% else %}
+                                                <h1 class="mb-5"> Hola , invitado </h1>
+                                            {% endif %}
+                                        </div>
+                                </div>
                             </div>
-                            <br>
-                            <br>
-
-                            {% if request.user.is_authenticated %}
-                                <h1 class="mb-5"> Hola , {{user.username}} </h1>
-                                    <img src="{{url}}" width="200" height="200" >
-                            {% else %}
-                                <h1 class="mb-5"> Hola , invitado </h1>
-                            {% endif %}
 
                             <br>
                             <br>
                             
-                            <h1 class="mb-5">BIENVENIDO A BLOG-TRANSPORTES ESCOLARES ENCUENTRA:</h1>
+                            <h1 class="mb-5">About me:</h1>
+
+                                    <p>TRANSPORTE EMPRESARIAL
+                                        Brindamos un servicio de transporte único en el traslado de personal desde y hacia su empresa, garantizando cumplimiento de los horarios establecidos, comodidad con nuestro parque automotor renovado y seguridad en cada ruta de destino dentro y fuera de la ciudad.
+                                        En AS TRANSPORTES estamos certificados integralmente bajo las normas ISO 9001, ISO 14001 y OHSAS 18001, lo cual nos permite ofrecer a su empresa la confianza de adquirir grandes y mejores procesos de calidad, acreditados por una entidad imparcial y reconocida a nivel mundial como es Bureau Veritas.
+                                        Nuestro servicio a nivel Nacional permite brindarle mayores coberturas en sus solicitudes de transporte, en donde contamos con una amplia red de oficinas ubicadas en: Bogotá, Medellín, Cali, Montería, Cartagena, Barranquilla, Bucaramanga, Buenaventura, Pereira y Manizales.
+                                        APLICATIVO MÓVIL AS EMPRESARIAL
+                                        Nuestro nuevo aplicativo AS empresarial brinda seguridad y confianza a empresas y empleados, una herramienta que ofrece información en tiempo real del vehículo, quién transporta a sus empleados y permite una comunicación permanente entre empresa, empleados, conductores y AS TRANSPORTES.
+                                        Es una solución de tecnología móvil que brinda muchas ventajas, entre ellas:
+                                        Mantener informado en tiempo real de lo que pasa con el recorrido de sus empleados.
+                                        Saber con anticipación horas de recogida y llegada, conocer condiciones del tráfico, cierres viales, retrasos por congestión, posibles desvíos, rutas alternas y control de la velocidad
+                                        Establecer los recorridos más eficientes y la mejor ruta de acuerdo a las condiciones viales.
+                                        Notificar inasistencia.
+                                    </P>
+                                
                                 <ul>
                                     <li> Mejores conductores de la ciudad.</li>
                                     <li> Mejores empresas de la ciudad.</li>
                                     <li> Mejores rutas para la comodidad de sus hijos. </li>
                                 </ul>
-                                <div class="container">
-                                    <a class="btn bg-dark text-white" href="{% url "Mostrar" %}"> Mostrar Conductores </a>
-                                    <a class="btn bg-dark text-white" href="{% url "List" %}"> Mostrar Empresas </a>
-                                    <a class="btn bg-dark text-white" href="{% url "comentario" %}"> Hacer Comentarios </a>
-                                    <a class="btn bg-dark text-white" href="{% url "Mostrar Comentarios" %}"> Mostrar Comentarios </a>
-                                    <a class="btn bg-dark text-white" href="{% url "Buscar Comentarios" %}"> Buscar Comentarios </a>
-                            <!-- Signup form-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
-                        </div>
-                </div>
-            </div>
-        </header>
-        <!-- Icons Grid-->
-        
-        <!--{% block codigodinamico %}
+                            <br>
+                            <br>
+                            <h2>Creado por:</h2>
+                            <br>
+                            <br>
 
+                            <p> Estudiante Brian Alexander Amezquita parada estudiante de CODER-HOUSE en el curso de python
+                                ,estudiante de inegenieria de sistemas de la universidad central de Colombia - Bogota Dc:
 
-        
-        {% endblock %}-->
+                                Cree este proyecto para diligenciar datos de algunas empresas de transporte en el sector con el fin de 
+                                poder ayudar a solucionar todos los problemas que poseen esto servicios a la hora de transitar en las calles de bgota tanto problemas internos de ruta como externos por lo cual un usuario poder consultar las rutas de sus hijos, los conductores y a que empresa pertenecen y tambien crear un  usuario con el fin de tener mas claridad de queines nos consultan para lo cual econtraran un espaciado de comentarios para poder solucionar sus dudas y nosotros poder acalarar todos los inconveninetes.
+                            </p>
+                            
 
         <!-- Footer-->
         <footer class="footer bg-light">

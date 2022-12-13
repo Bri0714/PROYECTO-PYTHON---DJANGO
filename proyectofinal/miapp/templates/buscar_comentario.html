@@ -23,6 +23,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="btn btn-primary" href="{% url "Home" %}"> inicio </a>
+                <a class="btn btn-primary" href="{% url "Mostrar" %}"> Mostrar </a>
                 <a class="btn btn-secondary" href="{% url "conductor" %}"> Crear Conductor </a>
                 <a class="btn btn-secondary" href="{% url "empresa" %}"> Crear Empresa </a>
                 <a class="btn btn-secondary" href="{% url "ruta" %}"> Crear Ruta </a>
@@ -32,48 +33,51 @@
                 <a class="btn btn-primary" href="{% url "Logout" %}">Logout</a>
             </div>
         </nav>
-        
-        <div class="container position-relative">
-            <div class="row justify-content-left">
-                    <div class="text-justify text-black">
-                        <br>
-                        <br>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5">
+                    <div class="text-center text-black">
+
+                        <form action="" metod="get">
+
+                            <h3>Buscar Comentarios:</h3>
+                
+                            <input type="text" name = "author" id = "author">
                         
-                        <div class="container position-relative">
-                            <div class="row justify-content-center">
-                                    <div class="text-center text-black">
-                                        <h1>
-                                            Todos los comentarios quejas y Reclamos:
-                                        </h1>
-                                    </div>
-                            </div>
-                        </div>
-
+                            <button type="submit" value="buscar"> buscar </button>
+                        
+                        
+                        </form>
                         <br>
                         <br>
-                        {% for comentario in comentarios %}
-                    
-                                    <h2> Author : {{comentario.author}}</h1>
-                                    <br>
 
-                                    <h5> Conductor:{{comentario.conductor}}</h5>
+                        <p>PORFAVOR ANTES DE BUSCAR EL COMENTARIO DE OTRO UASUARIO O AUTHOR  VERFIQUE EXACTAMENTE EL NOMBRE DEL AUTHOR  PARA REALIZAR LA BUSQUEDA, DE LO CONTRARIO NO PODRA ENCONTRAR EL COMENTARIO
+                        </P>
+                        
+                            {% if comentarios %}
+                                
+                                {% for comentario in comentarios %}
+                                <h3> Author : {{comentario.author}}</h3>
+                                    <p> -    {{comentario.text}}</p>
+                                    <p>{{comentario.created_date}}</p>
                                     
-                                    <br>
-                                        <p> -    {{comentario}}</p>
-
-                                    <br>
-                                        <p>{{comentario.created_date}}</p>
-                                    <br>
+                                    <ul>     
+                                        {% for conductor in conductores %}
+                                            <li>{{conductor}}</li>
+                                        {% endfor %}
+                                    </ul>  
                                     
-                                        <img src="{{a.imagen.url}}"  width="600" height="400" >
-                                    
-                                        
-                                        
-                        {% endfor %}
+                                {% endfor %}     
+                                
+                            {% else %}
+                                    <p> No hay datos de los condcutores en esta empresa . vuelve a intentarlo o agrega conductores.</p>
+                            {% endif %}
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
+        
     <!-- Footer-->
     <footer class="footer bg-light">
         <div class="container">
@@ -117,6 +121,3 @@
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
-
-
-

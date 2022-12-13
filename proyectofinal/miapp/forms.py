@@ -67,5 +67,6 @@ class crearcomentarioform(forms.ModelForm):
             'author',
             'text',
             'created_date',
+            "Imagen"
         ]
 

@@ -45,8 +45,10 @@ def crear_conductor(request):
                         conductor1 = conductor(nombre=formulario_limpio["nombre"], apellido=formulario_limpio["apellido"],celular=formulario_limpio["celular"],edad=formulario_limpio["edad"],empresa=formulario_limpio["empresa"])
                         
                         conductor1.save()
+
+                        imagenes = Avatar.objects.filter(user = request.user.id)
                 
-                return render(request, "index.html")
+                return render(request, "index.html", {"url": imagenes[0].imagen.url})
 
         else:
                 
@@ -70,8 +72,10 @@ def crear_empresa(request):
                         empresa1 = empresa(nombre=formulario_limpio["nombre"])
                         
                         empresa1.save()
+
+                        imagenes = Avatar.objects.filter(user = request.user.id)
                 
-                return render(request, "index.html")
+                return render(request, "index.html", {"url": imagenes[0].imagen.url})
 
         else:
                 
@@ -94,8 +98,11 @@ def crear_ruta(request):
                         ruta1 = ruta( number=formulario_limpio["number"], placa=formulario_limpio["placa"], conductor =formulario_limpio["conductor"] )
                         
                         ruta1.save()
+
+                        imagenes = Avatar.objects.filter(user = request.user.id)
                 
-                return render(request, "index.html")
+                return render(request, "index.html", {"url": imagenes[0].imagen.url})
+
 
         else:
                 
@@ -260,8 +267,10 @@ def editar_usuario(request):
                         usuario.password2 = informacion["password2"]
 
                         usuario.save()
+
+                        imagenes = Avatar.objects.filter(user = request.user.id)
                 
-                return render(request, "index.html" )
+                return render(request, "index.html", {"url": imagenes[0].imagen.url})
 
         else:
                 usuario_form = UserEditForm(initial={
@@ -281,17 +290,19 @@ def post_details(request):
 
         if request.method == "POST":
 
-                formulario = crearcomentarioform(request.POST)
+                formulario = crearcomentarioform(request.POST,request.FILES)
                 
                 if formulario.is_valid():
                         
                         formulario_limpio = formulario.cleaned_data
                         
-                        comentarios1 = Comment(conductor=formulario_limpio["conductor"], author=formulario_limpio["author"],text=formulario_limpio["text"],created_date=formulario_limpio["created_date"])
+                        comentarios1 = Comment(conductor=formulario_limpio["conductor"], author=formulario_limpio["author"],text=formulario_limpio["text"],created_date=formulario_limpio["created_date"],Imagen=formulario_limpio["Imagen"])
                         
                         comentarios1.save()
+
+                        imagenes = Avatar.objects.filter(user = request.user.id)
                 
-                return render(request, "index.html")
+                return render(request, "index.html", {"url": imagenes[0].imagen.url})
 
         else:
                 
@@ -299,11 +310,40 @@ def post_details(request):
 
         return render(request, "post_details.html", {"formulario" : crearcomentarioform } )
 
+
+
 @login_required
 def mostrar_comentarios(request):
-
 
         comentarios = Comment.objects.all()
         context = {"comentarios": comentarios }
 
         return render(request, "mostrar_comentarios.html", context=context)
+
+
+
+@login_required
+def buscar_comentario(request):
+        
+        if request.GET.get("author", False):
+                
+                author = request.GET["author"]
+                comentarios = Comment.objects.filter(author__icontains = author).values()
+
+                print(comentarios[0]['id'])
+                conductores = conductor.objects.filter(comment=comentarios[0]['id'])
+                print(conductores)
+                
+                return render(request, "buscar_comentario.html", {"comentarios" : comentarios, "conductores" : conductores})
+        else:
+                respuesta = "no hay datos"
+        
+        return render(request, "buscar_comentario.html", {"respuesta" : respuesta} )
+
+
+def sobre_nosotros(request):
+
+        imagenes = Avatar.objects.filter(user = request.user.id)
+                
+        return render(request, "sobre_nosotros.html", {"url": imagenes[0].imagen.url})
+

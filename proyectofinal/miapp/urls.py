@@ -40,4 +40,6 @@ urlpatterns = [
     path("editar_usuario/", views.editar_usuario, name = "Editar User"),
     path("post_details/", views.post_details, name = "comentario"),
     path("mostrar_comentarios/", views.mostrar_comentarios, name="Mostrar Comentarios"),
+    path("buscar_comentarios/", views.buscar_comentario, name="Buscar Comentarios"),
+    path("sobre_nosotros/", views.sobre_nosotros, name="Sobre Nosotros"),
 ]

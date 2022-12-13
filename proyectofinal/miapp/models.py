@@ -52,6 +52,7 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=datetime.now())
     approved_comment = models.BooleanField(default=False)
+    Imagen = models.ImageField(upload_to="Pruebas", null=True)
 
     def approve(self):
         self.approved_comment = True
